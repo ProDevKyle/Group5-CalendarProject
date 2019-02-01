@@ -4,6 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import java.util.Calendar;
 
+import java.awt.event.ActionEvent;
+
 public class Controller {
     private int[] DAYS_IN_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -22,5 +24,9 @@ public class Controller {
                 }
             }
         }.start();
+    }
+
+    public void showNotes(ActionEvent actionEvent) {
+
     }
 }
