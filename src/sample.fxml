@@ -48,6 +48,6 @@
          </children>
       </GridPane>
       <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Calendar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Notes" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showNotes" text="Notes" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
