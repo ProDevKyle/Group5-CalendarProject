@@ -105,4 +105,8 @@ public class Controller {
     private static int getYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
+
+    private static void addNotes() {
+
+    }
 }
