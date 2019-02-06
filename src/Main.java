@@ -2,15 +2,20 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    Scene scene1, scene2;
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        GridPane calendarGP = (GridPane) root.lookup("#calendarGP");
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 7; c++) {
+                calendarGP.add(FXMLLoader.load(getClass().getResource("cell.fxml")), c, r);
+            }
+        }
         primaryStage.setTitle("Hello World");
-        //Scene scene2 = new Scene(root, 300, 275);
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }

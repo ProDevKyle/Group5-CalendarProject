@@ -2,574 +2,144 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" hgap="5.0" prefHeight="720.0" prefWidth="1280.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<GridPane fx:id="mainGP" alignment="CENTER" hgap="5.0" prefHeight="720.0" prefWidth="1280.0" vgap="10.0"
+          xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <columnConstraints>
-        <ColumnConstraints percentWidth="100.0" />
+        <ColumnConstraints percentWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="-Infinity" vgrow="ALWAYS" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints />
+        <RowConstraints/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
+        <RowConstraints/>
+        <RowConstraints fillHeight="false" percentHeight="0.0"/>
     </rowConstraints>
     <children>
-        <Label fx:id="date" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Date | Time" GridPane.columnSpan="2147483647">
+        <Label fx:id="dateL" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+               text="Date | Time" GridPane.columnSpan="2147483647">
             <font>
-                <Font size="24.0" />
+                <Font size="24.0"/>
             </font>
             <padding>
-                <Insets bottom="5.0" />
+                <Insets bottom="5.0"/>
             </padding>
         </Label>
-        <TabPane prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
+        <TabPane prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE"
+                 GridPane.rowIndex="1">
             <tabs>
                 <Tab text="Calendar">
                     <content>
                         <AnchorPane>
                             <children>
-                                <GridPane fx:id="calendarPane" alignment="CENTER" gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="612.0" prefWidth="1260.0">
-                                    <columnConstraints>
-                                        <ColumnConstraints percentWidth="14.285714285714286" />
-                                        <ColumnConstraints percentWidth="14.285714285714286" />
-                                        <ColumnConstraints percentWidth="14.285714285714286" />
-                                        <ColumnConstraints percentWidth="14.285714285714286" />
-                                        <ColumnConstraints percentWidth="14.285714285714286" />
-                                        <ColumnConstraints percentWidth="14.285714285714286" />
-                                        <ColumnConstraints percentWidth="14.285714285714286" />
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints />
-                                        <RowConstraints vgrow="ALWAYS" />
-                                        <RowConstraints vgrow="ALWAYS" />
-                                        <RowConstraints vgrow="ALWAYS" />
-                                        <RowConstraints vgrow="ALWAYS" />
-                                        <RowConstraints vgrow="ALWAYS" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-                                    </rowConstraints>
+                                <VBox layoutX="-1.0" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0"
+                                      AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0"
+                                      AnchorPane.topAnchor="-1.0">
                                     <children>
-                                        <AnchorPane layoutX="190.0" layoutY="140.0" GridPane.rowIndex="1">
+                                        <AnchorPane>
                                             <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
+                                                <HBox AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0">
+                                                    <children>
+                                                        <Button fx:id="prevMonthB" mnemonicParsing="false" text="⇦"
+                                                                textAlignment="CENTER">
+                                                            <font>
+                                                                <Font name="System Bold" size="21.0"/>
+                                                            </font>
+                                                        </Button>
+                                                        <ChoiceBox fx:id="monthCB" maxHeight="1.7976931348623157E308"
+                                                                   maxWidth="1.7976931348623157E308"
+                                                                   minHeight="-Infinity" minWidth="-Infinity"
+                                                                   HBox.hgrow="ALWAYS"/>
+                                                        <Button fx:id="nextMonthB" layoutX="10.0" layoutY="10.0"
+                                                                mnemonicParsing="false" text="⇨" textAlignment="CENTER">
+                                                            <font>
+                                                                <Font name="System Bold" size="21.0"/>
+                                                            </font>
+                                                        </Button>
+                                                    </children>
+                                                </HBox>
                                             </children>
                                         </AnchorPane>
-                                        <AnchorPane layoutX="10.0" layoutY="27.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                        <GridPane fx:id="calendarPane1" alignment="CENTER" gridLinesVisible="true">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints/>
+                                            </rowConstraints>
                                             <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
+                                                <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="S"/>
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0"
+                                                       maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="M"
+                                                       GridPane.columnIndex="1"/>
+                                                <Label alignment="CENTER" layoutX="60.0" layoutY="10.0"
+                                                       maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="T"
+                                                       GridPane.columnIndex="2"/>
+                                                <Label alignment="CENTER" layoutX="110.0" layoutY="10.0"
+                                                       maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="W"
+                                                       GridPane.columnIndex="3"/>
+                                                <Label alignment="CENTER" layoutX="160.0" layoutY="10.0"
+                                                       maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="T"
+                                                       GridPane.columnIndex="4"/>
+                                                <Label alignment="CENTER" layoutX="210.0" layoutY="10.0"
+                                                       maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="F"
+                                                       GridPane.columnIndex="5"/>
+                                                <Label alignment="CENTER" layoutX="260.0" layoutY="10.0"
+                                                       maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="S"
+                                                       GridPane.columnIndex="6"/>
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="11.0"
+                                                       maxHeight="1.7976931348623157E308"
+                                                       maxWidth="1.7976931348623157E308" text="S"/>
                                             </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="190.0" layoutY="27.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="370.0" layoutY="27.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="550.0" layoutY="159.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="730.0" layoutY="27.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="910.0" layoutY="27.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="190.0" layoutY="165.0" GridPane.rowIndex="2">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="190.0" layoutY="146.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="10.0" layoutY="291.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="1090.0" layoutY="27.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="730.0" layoutY="159.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="910.0" layoutY="159.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="10.0" layoutY="165.0" GridPane.rowIndex="3">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="10.0" layoutY="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="190.0" layoutY="291.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="370.0" layoutY="291.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="550.0" layoutY="291.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="730.0" layoutY="291.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="910.0" layoutY="291.0" GridPane.columnIndex="6" GridPane.rowIndex="3">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="1090.0" layoutY="291.0" GridPane.rowIndex="4">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="10.0" layoutY="403.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="190.0" layoutY="403.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="370.0" layoutY="403.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="550.0" layoutY="403.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="730.0" layoutY="403.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="910.0" layoutY="403.0" GridPane.columnIndex="6" GridPane.rowIndex="4">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="1090.0" layoutY="403.0" GridPane.rowIndex="5">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="10.0" layoutY="503.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="190.0" layoutY="384.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="370.0" layoutY="503.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="550.0" layoutY="503.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="730.0" layoutY="503.0" GridPane.columnIndex="5" GridPane.rowIndex="5">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane layoutX="910.0" layoutY="503.0" GridPane.columnIndex="6" GridPane.rowIndex="5">
-                                            <children>
-                                                <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                    <font>
-                                                        <Font name="System Bold Italic" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </AnchorPane>
-                                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="S" />
-                                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="M" GridPane.columnIndex="1" />
-                                        <Label alignment="CENTER" layoutX="60.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="T" GridPane.columnIndex="2" />
-                                        <Label alignment="CENTER" layoutX="110.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="W" GridPane.columnIndex="3" />
-                                        <Label alignment="CENTER" layoutX="160.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="T" GridPane.columnIndex="4" />
-                                        <Label alignment="CENTER" layoutX="210.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="F" GridPane.columnIndex="5" />
-                                        <Label alignment="CENTER" layoutX="260.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="S" GridPane.columnIndex="6" />
-                                        <Label alignment="CENTER" layoutX="10.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="S" />
-                              <AnchorPane layoutX="1090.0" layoutY="425.0" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold Italic" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="524.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold Italic" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="190.0" layoutY="524.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold Italic" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="370.0" layoutY="524.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold Italic" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="550.0" layoutY="524.0" GridPane.columnIndex="4" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold Italic" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="730.0" layoutY="524.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold Italic" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="910.0" layoutY="524.0" GridPane.columnIndex="6" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label alignment="CENTER" prefWidth="28.0" style="-fx-border-width: 1.25; -fx-border-color: gray;" text="1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="System Bold Italic" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
+                                        </GridPane>
+                                        <GridPane fx:id="calendarGP" alignment="CENTER" gridLinesVisible="true"
+                                                  VBox.vgrow="ALWAYS">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
+                                                <RowConstraints minHeight="10.0" percentHeight="16.666666666666668"
+                                                                prefHeight="30.0" vgrow="ALWAYS"/>
+                                            </rowConstraints>
+                                        </GridPane>
                                     </children>
-                                </GridPane>
+                                </VBox>
                             </children>
                         </AnchorPane>
                     </content>
@@ -578,8 +148,9 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <FlowPane prefHeight="200.0" prefWidth="200.0" />
-                        <Button layoutX="618.0" layoutY="293.0" mnemonicParsing="false" onAction="#addNotes" text="+" />
+                                <FlowPane prefHeight="200.0" prefWidth="200.0"/>
+                                <Button layoutX="618.0" layoutY="293.0" mnemonicParsing="false" onAction="#addNotes"
+                                        text="+"/>
                             </children>
                         </AnchorPane>
                     </content>
@@ -588,6 +159,6 @@
         </TabPane>
     </children>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
     </padding>
 </GridPane>

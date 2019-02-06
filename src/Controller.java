@@ -1,7 +1,10 @@
 import javafx.animation.AnimationTimer;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -10,43 +13,19 @@ import java.util.List;
 
 public class Controller {
     private int[] DAYS_IN_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private int currentMonth;
+    private AnchorPane currentDayAP;
+    private List<Node> dayAPs;
+    private BackEnd events = new BackEnd("src/events.csv");
 
     @FXML
-    private Label date;
-
+    private Label dateL;
     @FXML
-    private GridPane calendarPane;
-
+    private GridPane calendarGP;
     @FXML
-    public void initialize() {
-        date.setText("Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + ".");
-        List<Node> nodes = calendarPane.getChildren();
-        int d = 0;
-        for (int i = 0; i < nodes.size(); i++) {
-            Node n = nodes.get(i);
-            if (n instanceof AnchorPane)
-                ((Label) ((AnchorPane) n).getChildren().get(0)).setText(Integer.toString(++d));
-        }
-        new AnimationTimer() {
-            Long time = System.currentTimeMillis();
-            @Override
-            public void handle(long now) {
-                if (System.currentTimeMillis() - time > 1000) {
-                    time = System.currentTimeMillis();
-                }
-            }
-        }.start();
-    }
-
-    private static void displayYear() {
-        int[] monthStarts = new int[12];
-        int day = getDay();
-        int dayWeekday = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        int month = Calendar.getInstance().get(Calendar.MONTH);
-        for (int i = 0; i < monthStarts.length; i++) {
-
-        }
-    }
+    private ChoiceBox monthCB;
+    @FXML
+    private Button prevMonthB, nextMonthB;
 
     private static String getWeekday() {
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
@@ -99,14 +78,75 @@ public class Controller {
     }
 
     private static int getDay() {
-       return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
     private static int getYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
 
-    private static void addNotes() {
+    @FXML
+    public void initialize() {
+        dayAPs = calendarGP.getChildren();
+        monthCB.setTooltip(new Tooltip("Select a month"));
+        monthCB.setItems(FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
+        monthCB.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov,
+                 Number old_val, Number new_val) -> {
+                    currentMonth = (int) new_val;
+                    displayMonth();
+                }
+        );
+        prevMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() - 1));
+        nextMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() + 1));
+        dateL.setText("Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + ".");
+        new AnimationTimer() {
+            Long time = System.currentTimeMillis();
+
+            @Override
+            public void handle(long now) {
+                if (System.currentTimeMillis() - time > 0) {
+                    time = System.currentTimeMillis();
+                    monthCB.getSelectionModel().select(Calendar.getInstance().get(Calendar.MONTH));
+                    this.stop();
+                }
+            }
+        }.start();
+    }
+
+    private void displayMonth() {
+        if (currentDayAP != null)
+            currentDayAP.setStyle("-fx-background-color:none");
+        int offset = 3;
+        for (int i = 0; i < currentMonth; i++)
+            offset = (offset + DAYS_IN_MONTH[i]) % 7;
+        for (int i = 0, currentDay = 0; i < dayAPs.size(); i++) {
+            if (dayAPs.get(i) instanceof AnchorPane) {
+                AnchorPane anchorPane = (AnchorPane) dayAPs.get(i);
+                ListView listView = (ListView) anchorPane.getChildren().get(1);
+                Label label = (Label) anchorPane.getChildren().get(0);
+                if (i >= offset && i < DAYS_IN_MONTH[currentMonth] + offset) {
+                    label.setVisible(true);
+                    label.setText("" + ++currentDay);
+                    ObservableList<String> items = FXCollections.observableArrayList();
+                    for (int j = 0; j < events.size(); j++) {
+                        if (events.getMonths().get(j).equals(currentMonth) && events.getDays().get(j).equals(currentDay - 1)) {
+                            items.add(events.getNames().get(j));
+                        }
+                    }
+                    listView.setItems(items);
+                } else
+                    label.setVisible(false);
+            }
+        }
+        if (currentMonth == Calendar.getInstance().get(Calendar.MONTH)) {
+            currentDayAP = (AnchorPane) dayAPs.get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + offset - 1);
+            currentDayAP.setStyle("-fx-background-color:#BFBFFF");
+        }
+    }
+
+    @FXML
+    private void addNotes() {
 
     }
 }
