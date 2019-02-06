@@ -5,10 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
+import java.awt.*;
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,6 +34,8 @@ public class Controller {
     private Button prevMonthB, nextMonthB;
     @FXML
     private AnchorPane NotesTab;
+    @FXML
+    private VBox vbox;
 
     private static String getWeekday() {
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
@@ -150,8 +157,9 @@ public class Controller {
 
     @FXML
     private void addNotes() {
-        Label label1 = new Label("Name:");
-        TextField textField = new TextField ();
-        NotesTab.getChildren().addAll(label1, textField);
+        TextField textField = new TextField();
+        textField.setPrefWidth(1000);
+        textField.setTranslateY(100);
+        vbox.getChildren().add(textField);
     }
 }
