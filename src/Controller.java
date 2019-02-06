@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import java.util.Calendar;
 import java.util.List;
@@ -26,6 +27,8 @@ public class Controller {
     private ChoiceBox monthCB;
     @FXML
     private Button prevMonthB, nextMonthB;
+    @FXML
+    private AnchorPane NotesTab;
 
     private static String getWeekday() {
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
@@ -147,6 +150,8 @@ public class Controller {
 
     @FXML
     private void addNotes() {
-
+        Label label1 = new Label("Name:");
+        TextField textField = new TextField ();
+        NotesTab.getChildren().addAll(label1, textField);
     }
 }

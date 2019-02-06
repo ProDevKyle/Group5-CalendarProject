@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,56 +15,46 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="mainGP" alignment="CENTER" hgap="5.0" prefHeight="720.0" prefWidth="1280.0" vgap="10.0"
-          xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<GridPane fx:id="mainGP" alignment="CENTER" hgap="5.0" prefHeight="720.0" prefWidth="1280.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <columnConstraints>
-        <ColumnConstraints percentWidth="100.0"/>
+        <ColumnConstraints percentWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
-        <RowConstraints/>
-        <RowConstraints fillHeight="false" percentHeight="0.0"/>
+        <RowConstraints />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints />
+        <RowConstraints fillHeight="false" percentHeight="0.0" />
     </rowConstraints>
     <children>
-        <Label fx:id="dateL" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-               text="Date | Time" GridPane.columnSpan="2147483647">
+        <Label fx:id="dateL" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Date | Time" GridPane.columnSpan="2147483647">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
             <padding>
-                <Insets bottom="5.0"/>
+                <Insets bottom="5.0" />
             </padding>
         </Label>
-        <TabPane prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE"
-                 GridPane.rowIndex="1">
+        <TabPane prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
             <tabs>
                 <Tab text="Calendar">
                     <content>
                         <AnchorPane>
                             <children>
-                                <VBox layoutX="-1.0" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0"
-                                      AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0"
-                                      AnchorPane.topAnchor="-1.0">
+                                <VBox layoutX="-1.0" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
                                     <children>
                                         <AnchorPane>
                                             <children>
                                                 <HBox AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0">
                                                     <children>
-                                                        <Button fx:id="prevMonthB" mnemonicParsing="false" text="⇦"
-                                                                textAlignment="CENTER">
+                                                        <Button fx:id="prevMonthB" mnemonicParsing="false" text="⇦" textAlignment="CENTER">
                                                             <font>
-                                                                <Font name="System Bold" size="21.0"/>
+                                                                <Font name="System Bold" size="21.0" />
                                                             </font>
                                                         </Button>
-                                                        <ChoiceBox fx:id="monthCB" maxHeight="1.7976931348623157E308"
-                                                                   maxWidth="1.7976931348623157E308"
-                                                                   minHeight="-Infinity" minWidth="-Infinity"
-                                                                   HBox.hgrow="ALWAYS"/>
-                                                        <Button fx:id="nextMonthB" layoutX="10.0" layoutY="10.0"
-                                                                mnemonicParsing="false" text="⇨" textAlignment="CENTER">
+                                                        <ChoiceBox fx:id="monthCB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS" />
+                                                        <Button fx:id="nextMonthB" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="⇨" textAlignment="CENTER">
                                                             <font>
-                                                                <Font name="System Bold" size="21.0"/>
+                                                                <Font name="System Bold" size="21.0" />
                                                             </font>
                                                         </Button>
                                                     </children>
@@ -74,68 +63,45 @@
                                         </AnchorPane>
                                         <GridPane fx:id="calendarPane1" alignment="CENTER" gridLinesVisible="true">
                                             <columnConstraints>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints/>
+                                                <RowConstraints />
                                             </rowConstraints>
                                             <children>
-                                                <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="S"/>
-                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0"
-                                                       maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="M"
-                                                       GridPane.columnIndex="1"/>
-                                                <Label alignment="CENTER" layoutX="60.0" layoutY="10.0"
-                                                       maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="T"
-                                                       GridPane.columnIndex="2"/>
-                                                <Label alignment="CENTER" layoutX="110.0" layoutY="10.0"
-                                                       maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="W"
-                                                       GridPane.columnIndex="3"/>
-                                                <Label alignment="CENTER" layoutX="160.0" layoutY="10.0"
-                                                       maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="T"
-                                                       GridPane.columnIndex="4"/>
-                                                <Label alignment="CENTER" layoutX="210.0" layoutY="10.0"
-                                                       maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="F"
-                                                       GridPane.columnIndex="5"/>
-                                                <Label alignment="CENTER" layoutX="260.0" layoutY="10.0"
-                                                       maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="S"
-                                                       GridPane.columnIndex="6"/>
-                                                <Label alignment="CENTER" layoutX="10.0" layoutY="11.0"
-                                                       maxHeight="1.7976931348623157E308"
-                                                       maxWidth="1.7976931348623157E308" text="S"/>
+                                                <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="S" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="M" GridPane.columnIndex="1" />
+                                                <Label alignment="CENTER" layoutX="60.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="T" GridPane.columnIndex="2" />
+                                                <Label alignment="CENTER" layoutX="110.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="W" GridPane.columnIndex="3" />
+                                                <Label alignment="CENTER" layoutX="160.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="T" GridPane.columnIndex="4" />
+                                                <Label alignment="CENTER" layoutX="210.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="F" GridPane.columnIndex="5" />
+                                                <Label alignment="CENTER" layoutX="260.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="S" GridPane.columnIndex="6" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="S" />
                                             </children>
                                         </GridPane>
-                                        <GridPane fx:id="calendarGP" alignment="CENTER" gridLinesVisible="true"
-                                                  VBox.vgrow="ALWAYS">
+                                        <GridPane fx:id="calendarGP" alignment="CENTER" gridLinesVisible="true" VBox.vgrow="ALWAYS">
                                             <columnConstraints>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
-                                                <ColumnConstraints percentWidth="14.285714285714286"/>
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
+                                                <ColumnConstraints percentWidth="14.285714285714286" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
-                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
-                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
-                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
-                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS"/>
-                                                <RowConstraints minHeight="10.0" percentHeight="16.666666666666668"
-                                                                prefHeight="30.0" vgrow="ALWAYS"/>
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS" />
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS" />
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS" />
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS" />
+                                                <RowConstraints percentHeight="16.666666666666668" vgrow="ALWAYS" />
+                                                <RowConstraints minHeight="10.0" percentHeight="16.666666666666668" prefHeight="30.0" vgrow="ALWAYS" />
                                             </rowConstraints>
                                         </GridPane>
                                     </children>
@@ -146,11 +112,10 @@
                 </Tab>
                 <Tab text="Notes">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane fx:id="NotesTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <FlowPane prefHeight="200.0" prefWidth="200.0"/>
-                                <Button layoutX="618.0" layoutY="293.0" mnemonicParsing="false" onAction="#addNotes"
-                                        text="+"/>
+                                <FlowPane prefHeight="200.0" prefWidth="200.0" />
+                                <Button fx:id="addButton" layoutX="618.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNotes" text="+" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -159,6 +124,6 @@
         </TabPane>
     </children>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
 </GridPane>
