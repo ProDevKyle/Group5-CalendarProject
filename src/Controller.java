@@ -2,6 +2,9 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -14,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.awt.*;
+import java.awt.ScrollPane;
 import java.util.Calendar;
 import java.util.List;
 
@@ -159,8 +163,18 @@ public class Controller {
     private void addNotes() {
         TextField textField = new TextField();
         textField.setPrefWidth(1000);
-        textField.setTranslateY(100);
         vbox.getChildren().add(textField);
+        Button b = new Button("Submit");
+        vbox.getChildren().add(b);
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                notes2();
+            }
+        });
+    }
+
+    private void notes2() {
     }
 
     @FXML
