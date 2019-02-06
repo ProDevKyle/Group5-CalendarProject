@@ -162,4 +162,9 @@ public class Controller {
         textField.setTranslateY(100);
         vbox.getChildren().add(textField);
     }
+
+    @FXML
+    private void removeNotes() {
+        
+    }
 }
