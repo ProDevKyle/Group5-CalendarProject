@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
-class Notes {
-    private static ArrayList<Notes> notes = new ArrayList<>();
+class Note {
+    private static ArrayList<Note> notes = new ArrayList<>();
     private String content;
 
-    Notes(String content) {
+    Note(String content) {
         this.content = content;
         notes.add(this);
     }
 
-    static ArrayList<Notes> getNotes() {
+    static ArrayList<Note> getNotes() {
         return notes;
     }
 

@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 class NotesCSV {
-    private static Path pathToFile = Paths.get(new File("src/saveNotesCSV.csv").getPath());
+    private static Path pathToFile = Paths.get(new File("src/notes.csv").getPath());
     private static String splitter = ",";
 
     NotesCSV() {
@@ -18,7 +18,7 @@ class NotesCSV {
             String line = br.readLine();
             while (line != null) {
                 String[] values = line.split(splitter);
-                new Notes(
+                new Note(
                         values[0].trim()
                 );
                 line = br.readLine();
@@ -37,7 +37,7 @@ class NotesCSV {
             ioe.printStackTrace();
         }
 
-        for (Notes note : Notes.getNotes()) {
+        for (Note note : Note.getNotes()) {
             String line = "\n" + note.getContent();
             try {
                 Files.write(pathToFile, line.getBytes(), StandardOpenOption.APPEND);

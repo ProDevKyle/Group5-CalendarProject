@@ -7,12 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.util.Calendar;
 import java.util.ConcurrentModificationException;
@@ -26,7 +24,6 @@ public class Controller {
     private int displayedMonth;
     private AnchorPane currentDayAP;
     private List<Node> dayAPs;
-
     @FXML
     private Label dateL;
     @FXML
@@ -37,8 +34,6 @@ public class Controller {
     private Button prevMonthB, nextMonthB;
     @FXML
     private AnchorPane NotesTab;
-    @FXML
-    private VBox vbox;
 
     private static String getWeekday() {
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
@@ -101,6 +96,7 @@ public class Controller {
     @FXML
     public void initialize() {
         new CSV();
+        new NotesCSV();
         dayAPs = calendarGP.getChildren();
         ChoiceBox<String> monthCB = new ChoiceBox<>();
         monthCB.setMaxHeight(MAX_VALUE);
@@ -115,29 +111,34 @@ public class Controller {
                     displayMonth();
                 }
         );
-        ListView<String> eventsLV = new ListView<>();
-        NotesTab.getChildren().add(eventsLV);
-        eventsLV.setEditable(true);
-        AnchorPane.setTopAnchor(eventsLV, 0.0);
-        AnchorPane.setRightAnchor(eventsLV, 0.0);
-        AnchorPane.setBottomAnchor(eventsLV, 0.0);
-        AnchorPane.setLeftAnchor(eventsLV, 27.0);
-        eventsLV.setCellFactory(EventCell::new);
-        ContextMenu cm = new ContextMenu();
-        MenuItem add = new MenuItem("Add Note");
-        cm.getItems().add(add);
-        eventsLV.setContextMenu(cm);
-        add.setOnAction(e -> {
-            eventsLV.getItems().add("New Note");
-            new Notes(
-                    "New Note"
-                    );
-            CSV.saveCSV();
-        });
 
         calendarHB.getChildren().set(1, monthCB);
         prevMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() - 1));
         nextMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() + 1));
+
+        ListView<String> notesLV = new ListView<>();
+        NotesTab.getChildren().add(notesLV);
+        notesLV.setEditable(true);
+        AnchorPane.setTopAnchor(notesLV, 0.0);
+        AnchorPane.setRightAnchor(notesLV, 0.0);
+        AnchorPane.setBottomAnchor(notesLV, 0.0);
+        AnchorPane.setLeftAnchor(notesLV, 0.0);
+        notesLV.setCellFactory(NoteCell::new);
+        ContextMenu cm = new ContextMenu();
+        MenuItem add = new MenuItem("Add Note");
+        cm.getItems().add(add);
+        notesLV.setContextMenu(cm);
+        add.setOnAction(e -> {
+            notesLV.getItems().add("New Note");
+            new Note("New Note");
+            NotesCSV.saveNotesCSV();
+        });
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+        for (Note n : Note.getNotes())
+            items.add(n.getContent());
+        notesLV.setItems(items);
+
         dateL.setText("Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + ".");
         new AnimationTimer() {
             Long time = System.currentTimeMillis();
@@ -191,7 +192,7 @@ public class Controller {
                 });
 
                 if (i >= offset && i < DAYS_IN_MONTH[displayedMonth] + offset) {
-                    dayL.setVisible(true);
+                    dayAP.setVisible(true);
                     dayL.setText("" + (day + 1));
 
                     ObservableList<String> items = FXCollections.observableArrayList();
@@ -203,7 +204,7 @@ public class Controller {
                     dayAP.getChildren().set(1, eventsLV);
                     day++;
                 } else
-                    dayL.setVisible(false);
+                    dayAP.setVisible(false);
             }
         }
 
@@ -234,7 +235,7 @@ public class Controller {
                         }
                     }
                 } catch (ConcurrentModificationException ex) {
-                    System.out.println("Uh oh.");
+                    System.out.println();
                 }
             });
             edit.setOnAction(e -> lv.edit(getIndex()));
@@ -269,11 +270,12 @@ public class Controller {
             }
         }
     }
-    static class EventCell2 extends TextFieldListCell<String> {
+
+    static class NoteCell extends TextFieldListCell<String> {
         private ContextMenu contextMenu;
         private String prevText;
 
-        EventCell2(ListView lv) {
+        NoteCell(ListView lv) {
             setConverter(TextFormatter.IDENTITY_STRING_CONVERTER);
             contextMenu = new ContextMenu();
             MenuItem delete = new MenuItem("Delete");
@@ -283,14 +285,14 @@ public class Controller {
                 try {
                     String text = getText();
                     lv.getItems().remove((getIndex()));
-                    for (Notes note : Notes.getNotes()) {
+                    for (Note note : Note.getNotes()) {
                         if (note.getContent().equals(text)) {
-                            Notes.getNotes().remove(note);
+                            Note.getNotes().remove(note);
                             NotesCSV.saveNotesCSV();
                         }
                     }
                 } catch (ConcurrentModificationException ex) {
-                    System.out.println("Uh oh.");
+                    System.out.println();
                 }
             });
             edit.setOnAction(e -> lv.edit(getIndex()));
@@ -317,21 +319,12 @@ public class Controller {
         @Override
         public void commitEdit(String newValue) {
             super.commitEdit(newValue);
-            for (Notes note : Notes.getNotes()) {
-                if (note.getNotes().equals(prevText)) {
+            for (Note note : Note.getNotes()) {
+                if (note.getContent().equals(prevText)) {
                     note.setContent(getText());
                     NotesCSV.saveNotesCSV();
                 }
             }
         }
     }
-
-    /*private void addNotes() {
-        TextField textField = new TextField();
-        textField.setPrefWidth(1000);
-        vbox.getChildren().add(textField);
-        Button b = new Button("Submit");
-        vbox.getChildren().add(b);
-        b.setOnAction(e -> notes2());
-    }*/
 }
