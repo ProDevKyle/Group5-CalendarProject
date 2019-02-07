@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("calendar.fxml"));
         GridPane calendarGP = (GridPane) root.lookup("#calendarGP");
         for (int r = 0; r < 6; r++) {
             for (int c = 0; c < 7; c++) {

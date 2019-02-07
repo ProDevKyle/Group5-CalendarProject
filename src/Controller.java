@@ -2,38 +2,37 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.awt.*;
-import java.awt.ScrollPane;
 import java.util.Calendar;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import static java.lang.Float.MAX_VALUE;
+import static javafx.scene.layout.Priority.ALWAYS;
+
 public class Controller {
-    private int[] DAYS_IN_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    private int currentMonth;
+    private final int[] DAYS_IN_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private int displayedMonth;
     private AnchorPane currentDayAP;
     private List<Node> dayAPs;
-    private BackEnd events = new BackEnd("src/events.csv");
 
     @FXML
     private Label dateL;
     @FXML
     private GridPane calendarGP;
     @FXML
-    private ChoiceBox monthCB;
+    private HBox calendarHB;
     @FXML
     private Button prevMonthB, nextMonthB;
     @FXML
@@ -101,16 +100,22 @@ public class Controller {
 
     @FXML
     public void initialize() {
+        new CSV();
         dayAPs = calendarGP.getChildren();
+        ChoiceBox<String> monthCB = new ChoiceBox<>();
+        monthCB.setMaxHeight(MAX_VALUE);
+        monthCB.setMaxWidth(MAX_VALUE);
+        HBox.setHgrow(monthCB, ALWAYS);
         monthCB.setTooltip(new Tooltip("Select a month"));
         monthCB.setItems(FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
         monthCB.getSelectionModel().selectedIndexProperty().addListener(
                 (ObservableValue<? extends Number> ov,
                  Number old_val, Number new_val) -> {
-                    currentMonth = (int) new_val;
+                    displayedMonth = (int) new_val;
                     displayMonth();
                 }
         );
+        calendarHB.getChildren().set(1, monthCB);
         prevMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() - 1));
         nextMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() + 1));
         dateL.setText("Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + ".");
@@ -131,31 +136,117 @@ public class Controller {
     private void displayMonth() {
         if (currentDayAP != null)
             currentDayAP.setStyle("-fx-background-color:none");
+
         int offset = 3;
-        for (int i = 0; i < currentMonth; i++)
-            offset = (offset + DAYS_IN_MONTH[i]) % 7;
-        for (int i = 0, currentDay = 0; i < dayAPs.size(); i++) {
+        for (int m = 0; m < displayedMonth; m++)
+            offset = (offset + DAYS_IN_MONTH[m]) % 7;
+
+        for (int i = 0, day = 0; i < dayAPs.size(); i++) {
             if (dayAPs.get(i) instanceof AnchorPane) {
-                AnchorPane anchorPane = (AnchorPane) dayAPs.get(i);
-                ListView listView = (ListView) anchorPane.getChildren().get(1);
-                Label label = (Label) anchorPane.getChildren().get(0);
-                if (i >= offset && i < DAYS_IN_MONTH[currentMonth] + offset) {
-                    label.setVisible(true);
-                    label.setText("" + ++currentDay);
+                AnchorPane dayAP = (AnchorPane) dayAPs.get(i);
+                Label dayL = (Label) dayAP.getChildren().get(0);
+
+                ListView<String> eventsLV = new ListView<>();
+                eventsLV.setEditable(true);
+                AnchorPane.setTopAnchor(eventsLV, 0.0);
+                AnchorPane.setRightAnchor(eventsLV, 0.0);
+                AnchorPane.setBottomAnchor(eventsLV, 0.0);
+                AnchorPane.setLeftAnchor(eventsLV, 27.0);
+                eventsLV.setCellFactory(EventCell::new);
+                ContextMenu cm = new ContextMenu();
+                MenuItem add = new MenuItem("Add Event");
+                cm.getItems().add(add);
+                eventsLV.setContextMenu(cm);
+                final int eventDay = day;
+                add.setOnAction(e -> {
+                    eventsLV.getItems().add("New Event");
+                    new Event(
+                            new Date(
+                                    displayedMonth,
+                                    eventDay
+                            ),
+                            "New Event"
+                    );
+                    CSV.saveCSV();
+                });
+
+                if (i >= offset && i < DAYS_IN_MONTH[displayedMonth] + offset) {
+                    dayL.setVisible(true);
+                    dayL.setText("" + (day + 1));
+
                     ObservableList<String> items = FXCollections.observableArrayList();
-                    for (int j = 0; j < events.size(); j++) {
-                        if (events.getMonths().get(j).equals(currentMonth) && events.getDays().get(j).equals(currentDay - 1)) {
-                            items.add(events.getNames().get(j));
-                        }
+                    for (Event e : Event.getEvents()) {
+                        if (e.getDate().getMonth() == displayedMonth && e.getDate().getDay() == day)
+                            items.add(e.getName());
                     }
-                    listView.setItems(items);
+                    eventsLV.setItems(items);
+                    dayAP.getChildren().set(1, eventsLV);
+                    day++;
                 } else
-                    label.setVisible(false);
+                    dayL.setVisible(false);
             }
         }
-        if (currentMonth == Calendar.getInstance().get(Calendar.MONTH)) {
+
+        if (displayedMonth == Calendar.getInstance().get(Calendar.MONTH)) {
             currentDayAP = (AnchorPane) dayAPs.get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + offset - 1);
             currentDayAP.setStyle("-fx-background-color:#BFBFFF");
+        }
+    }
+
+    static class EventCell extends TextFieldListCell<String> {
+        private ContextMenu contextMenu;
+        private String prevText;
+
+        EventCell(ListView lv) {
+            setConverter(TextFormatter.IDENTITY_STRING_CONVERTER);
+            contextMenu = new ContextMenu();
+            MenuItem delete = new MenuItem("Delete");
+            MenuItem edit = new MenuItem("Edit");
+            contextMenu.getItems().setAll(edit, delete);
+            delete.setOnAction(e -> {
+                try {
+                    String text = getText();
+                    lv.getItems().remove((getIndex()));
+                    for (Event event : Event.getEvents()) {
+                        if (event.getName().equals(text)) {
+                            Event.getEvents().remove(event);
+                            CSV.saveCSV();
+                        }
+                    }
+                } catch (ConcurrentModificationException ex) {
+                    System.out.println("Uh oh.");
+                }
+            });
+            edit.setOnAction(e -> lv.edit(getIndex()));
+        }
+
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setContextMenu(null);
+                setText(null);
+                setGraphic(null);
+            } else {
+                setContextMenu(contextMenu);
+            }
+        }
+
+        @Override
+        public void startEdit() {
+            prevText = getText();
+            super.startEdit();
+        }
+
+        @Override
+        public void commitEdit(String newValue) {
+            super.commitEdit(newValue);
+            for (Event event : Event.getEvents()) {
+                if (event.getName().equals(prevText)) {
+                    event.setName(getText());
+                    CSV.saveCSV();
+                }
+            }
         }
     }
 
@@ -166,19 +257,15 @@ public class Controller {
         vbox.getChildren().add(textField);
         Button b = new Button("Submit");
         vbox.getChildren().add(b);
-        b.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                notes2();
-            }
-        });
+        b.setOnAction(e -> notes2());
     }
 
     private void notes2() {
+
     }
 
     @FXML
     private void removeNotes() {
-        
+
     }
 }

@@ -1,13 +1,29 @@
 import java.util.ArrayList;
 
-public class Event {
-    private TimeInterval TimeInterval;
-    private ArrayList<String> tags;
+class Event {
+    private static ArrayList<Event> events = new ArrayList<>();
+    private Date date;
     private String name;
 
-    public Event(TimeInterval time, ArrayList<String> tags, String name) {
-        this.TimeInterval = time;
-        this.tags = tags;
+    Event(Date date, String name) {
+        this.date = date;
+        this.name = name;
+        events.add(this);
+    }
+
+    static ArrayList<Event> getEvents() {
+        return events;
+    }
+
+    Date getDate() {
+        return date;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    void setName(String name) {
         this.name = name;
     }
 }
