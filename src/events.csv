@@ -1,14 +1,14 @@
-name                              ,month,day
-Lunar New Year                    ,1    ,4
-Calc Test on Integrals           ,1    ,11
-Mr. Patellas' Birthday            ,2    ,4
-MY Birthday                       ,2    ,6
-My dearest's birthday             ,1    ,27
-Pantheon Project Presentation     ,1    ,7
-Don't Wash Your Hair Day          ,1    ,4
-No Sleep Day                      ,1    ,6
-The Exodus                        ,5    ,23
-A Very Special Day for some people,1    ,13
-New Year's Eve                    ,11   ,30
-Start of a new trial              ,1    ,15
-Birth of a good person            ,5    ,17
+name,month,day
+Lunar New Year,1,4
+Calc Test on Integrals,1,11
+Mr. Patellas' Birthday,2,4
+MY Birthday,2,6
+My dearest's birthday,1,27
+Pantheon Project Presentation,1,7
+Don't Wash Your Hair Day,1,4
+No Sleep Day,1,6
+The Exodus,5,23
+A Very Special Day for some people,1,13
+New Year's Eve,11,30
+Start of a new trial,1,15
+Birth of a good person,5,17

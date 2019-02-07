@@ -115,6 +115,26 @@ public class Controller {
                     displayMonth();
                 }
         );
+        ListView<String> eventsLV = new ListView<>();
+        NotesTab.getChildren().add(eventsLV);
+        eventsLV.setEditable(true);
+        AnchorPane.setTopAnchor(eventsLV, 0.0);
+        AnchorPane.setRightAnchor(eventsLV, 0.0);
+        AnchorPane.setBottomAnchor(eventsLV, 0.0);
+        AnchorPane.setLeftAnchor(eventsLV, 27.0);
+        eventsLV.setCellFactory(EventCell::new);
+        ContextMenu cm = new ContextMenu();
+        MenuItem add = new MenuItem("Add Note");
+        cm.getItems().add(add);
+        eventsLV.setContextMenu(cm);
+        add.setOnAction(e -> {
+            eventsLV.getItems().add("New Note");
+            new Notes(
+                    "New Note"
+                    );
+            CSV.saveCSV();
+        });
+
         calendarHB.getChildren().set(1, monthCB);
         prevMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() - 1));
         nextMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() + 1));
@@ -249,23 +269,69 @@ public class Controller {
             }
         }
     }
+    static class EventCell2 extends TextFieldListCell<String> {
+        private ContextMenu contextMenu;
+        private String prevText;
 
-    @FXML
-    private void addNotes() {
+        EventCell2(ListView lv) {
+            setConverter(TextFormatter.IDENTITY_STRING_CONVERTER);
+            contextMenu = new ContextMenu();
+            MenuItem delete = new MenuItem("Delete");
+            MenuItem edit = new MenuItem("Edit");
+            contextMenu.getItems().setAll(edit, delete);
+            delete.setOnAction(e -> {
+                try {
+                    String text = getText();
+                    lv.getItems().remove((getIndex()));
+                    for (Notes note : Notes.getNotes()) {
+                        if (note.getContent().equals(text)) {
+                            Notes.getNotes().remove(note);
+                            NotesCSV.saveNotesCSV();
+                        }
+                    }
+                } catch (ConcurrentModificationException ex) {
+                    System.out.println("Uh oh.");
+                }
+            });
+            edit.setOnAction(e -> lv.edit(getIndex()));
+        }
+
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setContextMenu(null);
+                setText(null);
+                setGraphic(null);
+            } else {
+                setContextMenu(contextMenu);
+            }
+        }
+
+        @Override
+        public void startEdit() {
+            prevText = getText();
+            super.startEdit();
+        }
+
+        @Override
+        public void commitEdit(String newValue) {
+            super.commitEdit(newValue);
+            for (Notes note : Notes.getNotes()) {
+                if (note.getNotes().equals(prevText)) {
+                    note.setContent(getText());
+                    NotesCSV.saveNotesCSV();
+                }
+            }
+        }
+    }
+
+    /*private void addNotes() {
         TextField textField = new TextField();
         textField.setPrefWidth(1000);
         vbox.getChildren().add(textField);
         Button b = new Button("Submit");
         vbox.getChildren().add(b);
         b.setOnAction(e -> notes2());
-    }
-
-    private void notes2() {
-
-    }
-
-    @FXML
-    private void removeNotes() {
-
-    }
+    }*/
 }
