@@ -1,14 +1,26 @@
-name                              ,month,day
-Lunar New Year                    ,1    ,4
-Calc Test on Integrals           ,1    ,11
-Mr. Patellas' Birthday            ,2    ,4
-MY Birthday                       ,2    ,6
-My dearest's birthday             ,1    ,27
-Pantheon Project Presentation     ,1    ,7
-Don't Wash Your Hair Day          ,1    ,4
-No Sleep Day                      ,1    ,6
-The Exodus                        ,5    ,23
-A Very Special Day for some people,1    ,13
-New Year's Eve                    ,11   ,30
-Start of a new trial              ,1    ,15
-Birth of a good person            ,5    ,17
+name,month,day
+Groundhog Day,1,1
+Lunar New Year,1,4
+Don't Wash Your Hair Day,1,4
+Pantheon Project Presentation,1,7
+Calc Test on Integrals,1,11
+Marco Quest,1,13
+Valentine's Day,1,13
+Mid Winter Recess,1,15
+Mid-Winter Recess,1,16
+Mid-Winter Recess,1,17
+Mid-Winter Recess,1,18
+Mid-Winter Recess,1,19
+Mid-Winter Recess,1,20
+Mid-Winter Recess,1,21
+Mid-Winter Recess,1,22
+Mid-Winter Recess,1,23
+My dearest's birthday,1,27
+Mr. Patellas' Birthday,2,4
+MY Birthday,2,6
+Daylight Savings,2,9
+St.Patrick's Day,2,16
+Spring Musical,2,27
+Spring Musical,2,28
+April Fool's Day,3,0
+Spring MP1 Ends,3,2
