@@ -60,9 +60,11 @@ July 4th,6,3
 Independence Day,6,3
 Labor Day                            ,8    ,1
 Columbus Day                         ,9    ,13
+Daylight Fallback,10,2
 Veterans Day                         ,10   ,10
 Thanksgiving Day                     ,10   ,27
 Black Friday                         ,10   ,28
 Cyber Monday                         ,11   ,1
 Christmas Eve                        ,11   ,23
 Christmas                            ,11   ,24
+New Year's Eve,11,30
