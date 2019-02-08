@@ -1,6 +1,13 @@
 name                                 ,month,day
 New Year's Day                       ,0    ,0
-Martin Luther King Day               ,0    ,20
+Fall MP2 Ends                        ,0    ,17
+Martin Luther King Day (no school)   ,0    ,20
+Regents Week                         ,0    ,21
+Regents Week                         ,0    ,22
+Regents Week                         ,0    ,23
+Regents Week                         ,0    ,24
+Conference Day (no school)           ,0    ,27
+Spring Term Begins                   ,0    ,28
 Groundhog Day                        ,1    ,1
 Lunar New Year (no school)           ,1    ,4
 Don't Wash Your Hair Day             ,1    ,4
@@ -42,8 +49,11 @@ Spring Recess                        ,3    ,25
 Spring Recess                        ,3    ,26
 Spring Recess                        ,3    ,27
 Students Return                      ,3    ,28
+College Decision Day                 ,4    ,0
 Cinco de Mayo                        ,4    ,4
 Mother's Day                         ,4    ,11
+Mom's Birthday                       ,4    ,15
+Tech Event                           ,4    ,24
 Memorial day (no school)             ,4    ,26
 Senior Yearbook Distribution         ,5    ,2
 Brooklyn Queens Day (no school)      ,5    ,5
