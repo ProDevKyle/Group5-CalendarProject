@@ -1,6 +1,6 @@
 name                                 ,month,day
-New Year's Day,0,0
-Martin Luther King Day,0,20
+New Year's Day                       ,0    ,0
+Martin Luther King Day               ,0    ,20
 Groundhog Day                        ,1    ,1
 Lunar New Year (no school)           ,1    ,4
 Don't Wash Your Hair Day             ,1    ,4
@@ -56,15 +56,32 @@ Senior Awards @ 6PM                  ,5    ,16
 Senior Cap & Gown Distribution @ 1PM ,5    ,19
 Brooklyn Tech Graduation             ,5    ,23
 Last Day for Students                ,5    ,25
-July 4th,6,3
-Independence Day,6,3
+4th of July                          ,6    ,3
+Internship 9AM - 4PM                 ,6    ,14
+Internship 9AM - 4PM                 ,6    ,15
+Internship 9AM - 4PM                 ,6    ,16
+Internship 9AM - 4PM                 ,6    ,17
+Internship 9AM - 4PM                 ,6    ,18
+Internship 9AM - 4PM                 ,6    ,21
+Internship 9AM - 4PM                 ,6    ,22
+Internship 9AM - 4PM                 ,6    ,24
+Internship 9AM - 4PM                 ,6    ,25
+Internship 9AM - 4PM                 ,6    ,28
+Internship 9AM - 4PM                 ,6    ,29
+Internship 9AM - 4PM                 ,6    ,30
+Internship 9AM - 4PM                 ,6    ,31
+Internship 9AM - 4PM                 ,7    ,0
+Internship 9AM - 4PM                 ,7    ,1
+Dad's Birthday                       ,7    ,5
 Labor Day                            ,8    ,1
 Columbus Day                         ,9    ,13
-Daylight Fallback,10,2
+Brother's Birthday                   ,9    ,23
+Daylight Fallback                    ,10   ,2
 Veterans Day                         ,10   ,10
+Sister's Birthday                    ,10   ,19
 Thanksgiving Day                     ,10   ,27
 Black Friday                         ,10   ,28
 Cyber Monday                         ,11   ,1
 Christmas Eve                        ,11   ,23
 Christmas                            ,11   ,24
-New Year's Eve,11,30
+New Year's Eve                       ,11   ,30
