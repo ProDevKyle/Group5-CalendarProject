@@ -21,9 +21,11 @@ import static javafx.scene.layout.Priority.ALWAYS;
 
 public class Controller {
     private final int[] DAYS_IN_MONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final String[] MONTH_COLOR = {"9E0002", "7E5798", "7EFFD4", "FEFEFE", "2F8151", "EAE0C7", "B5273F", "74B003", "0066A4", "ABC5C4", "FFC87D", "35DDDE"};
     private int displayedMonth;
     private AnchorPane currentDayAP;
     private List<Node> dayAPs;
+    private static ChoiceBox<String> monthCB = new ChoiceBox<>();
     @FXML
     private Label dateL;
     @FXML
@@ -98,10 +100,11 @@ public class Controller {
         new CSV();
         new NotesCSV();
         dayAPs = calendarGP.getChildren();
-        ChoiceBox<String> monthCB = new ChoiceBox<>();
+
+        HBox.setHgrow(monthCB, ALWAYS);
+        calendarHB.getChildren().set(1, monthCB);
         monthCB.setMaxHeight(MAX_VALUE);
         monthCB.setMaxWidth(MAX_VALUE);
-        HBox.setHgrow(monthCB, ALWAYS);
         monthCB.setTooltip(new Tooltip("Select a month"));
         monthCB.setItems(FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
         monthCB.getSelectionModel().selectedIndexProperty().addListener(
@@ -109,10 +112,10 @@ public class Controller {
                  Number old_val, Number new_val) -> {
                     displayedMonth = (int) new_val;
                     displayMonth();
+                    prevMonthB.setDisable(displayedMonth == Calendar.JANUARY);
+                    nextMonthB.setDisable(displayedMonth == Calendar.DECEMBER);
                 }
         );
-
-        calendarHB.getChildren().set(1, monthCB);
         prevMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() - 1));
         nextMonthB.setOnAction(e -> monthCB.getSelectionModel().select(monthCB.getSelectionModel().getSelectedIndex() + 1));
 
@@ -139,22 +142,26 @@ public class Controller {
             items.add(n.getContent());
         notesLV.setItems(items);
 
-        dateL.setText("Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + ".");
         new AnimationTimer() {
             Long time = System.currentTimeMillis();
 
             @Override
             public void handle(long now) {
-                if (System.currentTimeMillis() - time > 0) {
+                if (System.currentTimeMillis() - time > 1000) {
                     time = System.currentTimeMillis();
-                    monthCB.getSelectionModel().select(Calendar.getInstance().get(Calendar.MONTH));
-                    this.stop();
+                    dateL.setText("Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + "." + Calendar.getInstance().getTime().toString().substring(10, 19));
                 }
             }
         }.start();
     }
 
+    static void selectMonthNow() {
+        monthCB.getSelectionModel().select(Calendar.getInstance().get(Calendar.MONTH));
+    }
+
     private void displayMonth() {
+        monthCB.setStyle("-fx-background-color:#" + MONTH_COLOR[displayedMonth]);
+
         if (currentDayAP != null)
             currentDayAP.setStyle("-fx-background-color:none");
 
@@ -165,14 +172,14 @@ public class Controller {
         for (int i = 0, day = 0; i < dayAPs.size(); i++) {
             if (dayAPs.get(i) instanceof AnchorPane) {
                 AnchorPane dayAP = (AnchorPane) dayAPs.get(i);
-                Label dayL = (Label) dayAP.getChildren().get(0);
+                Label dayL = (Label) dayAP.getChildren().get(1);
 
                 ListView<String> eventsLV = new ListView<>();
                 eventsLV.setEditable(true);
                 AnchorPane.setTopAnchor(eventsLV, 0.0);
                 AnchorPane.setRightAnchor(eventsLV, 0.0);
                 AnchorPane.setBottomAnchor(eventsLV, 0.0);
-                AnchorPane.setLeftAnchor(eventsLV, 27.0);
+                AnchorPane.setLeftAnchor(eventsLV, 0.0);
                 eventsLV.setCellFactory(EventCell::new);
                 ContextMenu cm = new ContextMenu();
                 MenuItem add = new MenuItem("Add Event");
@@ -201,7 +208,7 @@ public class Controller {
                             items.add(e.getName());
                     }
                     eventsLV.setItems(items);
-                    dayAP.getChildren().set(1, eventsLV);
+                    dayAP.getChildren().set(0, eventsLV);
                     day++;
                 } else
                     dayAP.setVisible(false);

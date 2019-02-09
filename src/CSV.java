@@ -37,17 +37,14 @@ class CSV {
             FileWriter fw = new FileWriter(new File(pathToFile.toString()));
             fw.append("name,month,day");
             fw.close();
+
+            for (Event event : Event.getEvents()) {
+                String line = "\n" + event.getName() + splitter + event.getDate().getMonth() + splitter + event.getDate().getDay();
+                Files.write(pathToFile, line.getBytes(), StandardOpenOption.APPEND);
+            }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
 
-        for (Event event : Event.getEvents()) {
-            String line = "\n" + event.getName() + splitter + event.getDate().getMonth() + splitter + event.getDate().getDay();
-            try {
-                Files.write(pathToFile, line.getBytes(), StandardOpenOption.APPEND);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }
     }
 }

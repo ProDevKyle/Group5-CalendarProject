@@ -11,10 +11,10 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("calendar.fxml"));
         GridPane calendarGP = (GridPane) root.lookup("#calendarGP");
         for (int r = 0; r < 6; r++) {
-            for (int c = 0; c < 7; c++) {
+            for (int c = 0; c < 7; c++)
                 calendarGP.add(FXMLLoader.load(getClass().getResource("cell.fxml")), c, r);
-            }
         }
+        Controller.selectMonthNow();
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();

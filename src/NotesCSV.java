@@ -10,17 +10,13 @@ import java.nio.file.StandardOpenOption;
 
 class NotesCSV {
     private static Path pathToFile = Paths.get(new File("src/notes.csv").getPath());
-    private static String splitter = ",";
 
     NotesCSV() {
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
             br.readLine();
             String line = br.readLine();
             while (line != null) {
-                String[] values = line.split(splitter);
-                new Note(
-                        values[0].trim()
-                );
+                new Note(line.trim());
                 line = br.readLine();
             }
         } catch (IOException ioe) {
@@ -33,17 +29,12 @@ class NotesCSV {
             FileWriter fw = new FileWriter(new File(pathToFile.toString()));
             fw.append("content");
             fw.close();
+            for (Note note : Note.getNotes()) {
+                String line = "\n" + note.getContent();
+                Files.write(pathToFile, line.getBytes(), StandardOpenOption.APPEND);
+            }
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        }
-
-        for (Note note : Note.getNotes()) {
-            String line = "\n" + note.getContent();
-            try {
-                Files.write(pathToFile, line.getBytes(), StandardOpenOption.APPEND);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
         }
     }
 }
