@@ -29,6 +29,8 @@ public class Controller {
     @FXML
     private Label dateL;
     @FXML
+    private ProgressBar minutePB;
+    @FXML
     private GridPane calendarGP;
     @FXML
     private HBox calendarHB;
@@ -143,14 +145,20 @@ public class Controller {
         notesLV.setItems(items);
 
         new AnimationTimer() {
-            Long time = System.currentTimeMillis();
-
             @Override
             public void handle(long now) {
-                if (System.currentTimeMillis() - time > 1000) {
-                    time = System.currentTimeMillis();
-                    dateL.setText("Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + "." + Calendar.getInstance().getTime().toString().substring(10, 19));
-                }
+                String ms = Integer.toString(Calendar.getInstance().get(Calendar.MILLISECOND));
+                while (ms.length() < 4)
+                    ms += "0";
+                String text = "Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + "." + Calendar.getInstance().getTime().toString().substring(10, 19) + "." + ms;
+                dateL.setText(text);
+            }
+        }.start();
+
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                minutePB.setProgress((Calendar.getInstance().get(Calendar.SECOND) + (Calendar.getInstance().get(Calendar.MILLISECOND) / 1000.0)) / 60.0);
             }
         }.start();
     }
@@ -163,7 +171,7 @@ public class Controller {
         monthCB.setStyle("-fx-background-color:#" + MONTH_COLOR[displayedMonth]);
 
         if (currentDayAP != null)
-            currentDayAP.setStyle("-fx-background-color:none");
+            currentDayAP.getStyleClass().clear();
 
         int offset = 3;
         for (int m = 0; m < displayedMonth; m++)
@@ -217,7 +225,7 @@ public class Controller {
 
         if (displayedMonth == Calendar.getInstance().get(Calendar.MONTH)) {
             currentDayAP = (AnchorPane) dayAPs.get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + offset - 1);
-            currentDayAP.setStyle("-fx-background-color:#BFBFFF");
+            currentDayAP.getStyleClass().add("current-day");
         }
     }
 

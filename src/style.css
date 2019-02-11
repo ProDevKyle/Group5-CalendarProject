@@ -2,3 +2,8 @@ ListView {
     -fx-background-insets: 0;
     -fx-background-color: none;
 }
+
+.current-day * {
+    -fx-background-color: #BFBFFF !important;
+    -fx-font-weight: bold !important;
+}

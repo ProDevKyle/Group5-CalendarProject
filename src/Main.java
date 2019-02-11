@@ -15,8 +15,8 @@ public class Main extends Application {
                 calendarGP.add(FXMLLoader.load(getClass().getResource("cell.fxml")), c, r);
         }
         Controller.selectMonthNow();
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.setTitle("2019 Calendar");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

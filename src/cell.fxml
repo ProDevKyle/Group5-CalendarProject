@@ -5,15 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="list" layoutX="19.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0"
-              AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0"/>
-    <Label alignment="CENTER" prefWidth="19.0"
-           style="-fx-border-width: 1.25; -fx-border-color: gray; -fx-background-color: #F4F4F4;" text="1"
-           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <ListView fx:id="list" layoutX="19.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+    <Label alignment="CENTER" prefWidth="19.0" style="-fx-border-width: 1.25; -fx-border-color: gray; -fx-background-color: #F4F4F4;" text="1" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <font>
-            <Font size="10.0"/>
+            <Font size="10.0" />
         </font>
     </Label>
 </AnchorPane>
