@@ -5,8 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -97,6 +95,10 @@ public class Controller {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
 
+    static void chooseMonthNow() {
+        monthCB.getSelectionModel().select(Calendar.getInstance().get(Calendar.MONTH));
+    }
+
     @FXML
     public void initialize() {
         new CSV();
@@ -147,24 +149,19 @@ public class Controller {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                String ms = Integer.toString(Calendar.getInstance().get(Calendar.MILLISECOND));
+                StringBuilder ms = new StringBuilder(Integer.toString(Calendar.getInstance().get(Calendar.MILLISECOND)));
                 while (ms.length() < 4)
-                    ms += "0";
+                    ms.append("0");
                 String text = "Today is " + getWeekday() + ", " + getMonth() + " " + getDay() + ", " + getYear() + "." + Calendar.getInstance().getTime().toString().substring(10, 19) + "." + ms;
                 dateL.setText(text);
-            }
-        }.start();
-
-        new AnimationTimer() {
-            @Override
-            public void handle(long now) {
                 minutePB.setProgress((Calendar.getInstance().get(Calendar.SECOND) + (Calendar.getInstance().get(Calendar.MILLISECOND) / 1000.0)) / 60.0);
             }
         }.start();
     }
 
-    static void selectMonthNow() {
-        monthCB.getSelectionModel().select(Calendar.getInstance().get(Calendar.MONTH));
+    @FXML
+    void goToToday() {
+        chooseMonthNow();
     }
 
     private void displayMonth() {
